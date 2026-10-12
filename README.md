@@ -61,6 +61,15 @@ xattr -dr com.apple.quarantine /Applications/EverydayEnglish.app; chmod +x /Appl
   Воспользуйтесь вариантом с перетаскиванием файла в окно Терминала, он не ошибается.
 - macOS пишет, что приложение **повреждено** или **не удаётся проверить**: ещё раз выполните вторую строку
   из шага 2.
+- Терминал пишет **Operation not permitted** про `/Applications/`: вашей учётной записи нельзя писать в общую папку
+  «Программы». Поставьте приложение в личную папку «Программы», вставив вместо обеих команд одну строку:
+
+  ```bash
+  mkdir -p ~/Applications && ditto -x -k ~/Downloads/EverydayEnglish*.zip ~/Applications/ && xattr -dr com.apple.quarantine ~/Applications/EverydayEnglish.app; chmod +x ~/Applications/EverydayEnglish.app/Contents/MacOS/EverydayEnglish; open ~/Applications/EverydayEnglish.app
+  ```
+
+  Если та же ошибка про `Downloads`: macOS не дала Терминалу доступ к «Загрузкам». Системные настройки →
+  Конфиденциальность и безопасность → Файлы и папки → Терминал → включите «Папка Загрузки» и повторите.
 - Терминал спрашивает **пароль**: введите пароль от вашего Mac. Символы при вводе не отображаются, это
   нормально. Нажмите Enter.
 
